@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 #Controle du choix de version ou prise de la latest
 [[ ! "$VERSION_GLPI" ]] \
 	&& VERSION_GLPI=$(curl -s https://api.github.com/repos/glpi-project/glpi/releases/latest | grep tag_name | cut -d '"' -f 4)
@@ -46,7 +47,7 @@ LOCAL_GLPI_MAJOR_VERSION=$(echo $LOCAL_GLPI_VERSION | cut -d. -f1)
 LOCAL_GLPI_VERSION_NUM=${LOCAL_GLPI_VERSION//./}
 
 ## Target value is GLPI 1.0.7
-TARGET_GLPI_VERSION="10.0.7"
+TARGET_GLPI_VERSION="9.5.12"
 TARGET_GLPI_VERSION_NUM=${TARGET_GLPI_VERSION//./}
 TARGET_GLPI_MAJOR_VERSION=$(echo $TARGET_GLPI_VERSION | cut -d. -f1)
 
