@@ -25,4 +25,5 @@ services:
       - /var/www/html/glpi/:/var/www/html/glpi
     environment:
       - TIMEZONE=Europe/Brussels
+      - VERSION_GLPI=9.5.12
     restart: always
