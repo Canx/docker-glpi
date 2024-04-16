@@ -1,29 +1,33 @@
-version: "3.2"
+version: "3.8"
 
 services:
-#MariaDB Container
-  mariadb:
+#mysql Container
+  mysql:
     image: mysql:5.7.23
     container_name: mysql
     hostname: mysqldb
     volumes:
-      - /var/lib/mysql:/var/lib/mysql
-    env_file:
-      - ./mysqldb.env
-    restart: always
+      - /glpi/mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=diouxx
+      - MYSQL_DATABASE=glpidb
+      - MYSQL_USER=glpi_user
+      - MYSQL_PASSWORD=glpi
+    restart: unless-stopped
 
 #GLPI Container
   glpi:
-    image: diouxx/glpi
+    image: canchete/glpi:1.0
     container_name : glpi
     hostname: glpi
     ports:
-      - "80:8080"
+      - 8080:80
     volumes:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
-      - /var/www/html/glpi/:/var/www/html/glpi
+      - /glpi/apache:/var/www/html/glpi
     environment:
-      - TIMEZONE=Europe/Brussels
-      - VERSION_GLPI=9.5.12
-    restart: always
+      # Si no le pasamos versión te pone la última, a 15/4/2024 la 10.0.14
+      - VERSION_GLPI=9.5.3
+      - TIMEZONE=Europe/Madrid
+    restart: unless-stopped
