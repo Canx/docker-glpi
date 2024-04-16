@@ -5,6 +5,9 @@ services:
   mysql:
     image: mysql:5.7.23
     container_name: mysql
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile
     hostname: mysqldb
     volumes:
       - /glpi/mysql:/var/lib/mysql
@@ -19,6 +22,9 @@ services:
   glpi:
     image: canchete/glpi:1.0
     container_name : glpi
+    build:
+      context: ./glpi
+      dockerfile: Dockerfile
     hostname: glpi
     ports:
       - 8080:80
